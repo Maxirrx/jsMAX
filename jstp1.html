@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pierre Papier Ciseau</title>
+</head>
+<body>
+	<h3>Ordinateur</h3>
+	<h4 id="enemi"></h4><p id="scorenemi"></p>
+	<button id="pierre">pierre</button>	
+	<button id="feuille">feuille</button>
+	<button id="ciseaux">ciseaux</button>
+	<h3>Vous</h3>
+	<h4 id="moi"></h4><p id="scoremoi"></p>
+	<h1 id="result"></h1><p id="nbmanche"></p>
+</body>
+</html>
+
+<script>
+const tableau = ["pierre", "feuille", "ciseaux"]
+let rand = Math.floor(Math.random() * 2)
+
+let pierre = document.getElementById("pierre");
+pierre.addEventListener("click", () => compare("pierre",tableau[rand]));
+let feuille = document.getElementById("feuille");
+feuille.addEventListener("click", () => compare("feuille",tableau[rand]));
+let ciseaux = document.getElementById("ciseaux");
+ciseaux.addEventListener("click", () => compare("ciseaux",tableau[rand]));
+
+let score = { joueur: 0, ordinateur: 0, nbround: 0};
+
+function compare(moi, lui){
+	rand = Math.floor(Math.random() * 2)
+	document.getElementById("enemi").innerText = lui
+	document.getElementById("moi").innerText = moi
+	if (moi === lui) {
+		document.getElementById("result").innerText = "égalité"
+	}else if(moi === "pierre" && lui === "ciseaux"){
+		document.getElementById("result").innerText = "Vous gagnez"
+		score.joueur += 1
+	}else if(moi === "pierre" && lui === "feuille"){
+		document.getElementById("result").innerText = "Vous perdez"
+		score.ordinateur += 1
+	}else if(moi === "feuille" && lui === "ciseaux"){
+		document.getElementById("result").innerText = "Vous perdez"
+		score.ordinateur += 1
+	}else if(moi === "feuille" && lui === "pierre"){
+		document.getElementById("result").innerText = "Vous gagnez"
+		score.joueur += 1
+	}else if(moi === "ciseaux" && lui === "feuille"){
+		document.getElementById("result").innerText = "Vous gagnez"
+		score.joueur += 1
+	}else if(moi === "ciseaux" && lui === "pierre"){
+		document.getElementById("result").innerText = "Vous perdez"
+		score.ordinateur += 1
+	}
+	score.nbround += 1
+
+	document.getElementById("scoremoi").innerText = score.joueur
+	document.getElementById("scorenemi").innerText = score.ordinateur
+	document.getElementById("nbmanche").innerText = score.nbround
+
+}
+
+//for (i = 0; i<10000; i++){
+//	document.getElementById("ciseaux").click();
+//	console.log(score)
+//}
+
+</script>
