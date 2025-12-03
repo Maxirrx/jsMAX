@@ -1,1 +1,1 @@
-# jsMAX
+# Jeu-de-Go
